@@ -1,13 +1,13 @@
 package setMatrixZero;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
 //        Input: matrix = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
-        int[][] matrix = {{1, 1, 2, 1}, {3, 4, 0, 2}, {1, 3, 1, 5}};
-//        int[][] matrix = {new int[4], {3,4,5,2}, {}};
+        int[][] matrix = {{1,2,3,4}, {5,0,7,8}, {0,10,11,12}, {13,14,15,0}};
 
         printMatrix(matrix);
         System.out.println("Set Zeros");
@@ -15,27 +15,31 @@ public class Main {
     }
 
     static public void setZeroes(int[][] matrix) {
-        Set<Integer> row = new HashSet<>(), col = new HashSet<>();
-        int rl = matrix.length, cl = matrix[0].length;
+        boolean fr = false, fc = false;
         for (int i=0; i<matrix.length; i++) {
             for (int j=0; j<matrix[i].length; j++) {
                 if (matrix[i][j] == 0) {
-//                    row.add(i); col.add(j);
+                    if (i==0) fr = true;
+                    if (j==0) fc = true;
                     matrix[i][0] = 0;
                     matrix[0][j] = 0;
-                    break;
                 }
             }
         }
-        for (int i=0; i<rl; i++) {
-
+        for (int i=1; i<matrix.length; i++) {
+            for (int j=1; j<matrix[i].length; j++) {
+                if (matrix[i][0] == 0 || matrix[0][j]==0) {
+                    matrix[i][j] = 0;
+                }
+            }
         }
-//        for (int r: row) {
-//            matrix[r] = new int[cl];
-//        }
-//        for (int c: col) {
-//            matrix[0][c] = new int[rl];
-//        }
+        if (fr) {
+            Arrays.fill(matrix[0], 0);
+        }
+        if (fc) {
+            for (int i=0; i<matrix.length; i++) matrix[i][0]=0;
+        }
+
         printMatrix(matrix);
     }
 
