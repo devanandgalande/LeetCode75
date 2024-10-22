@@ -2,7 +2,6 @@ package reorderList;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
         //Input: head = [1,2,3,4]
         ListNode head = null;
         ListNode five = new ListNode(5, null);
